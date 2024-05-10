@@ -1,0 +1,76 @@
+1)Pull images:
+	docker pull openjdk:8-alpine
+	docker pull mysql
+
+2)Show all images:
+	docker images
+
+3)Run containers interactively:
+	docker run -it --name my_container --link mysql_container:mysql openjdk:8-alpine
+
+4)Run containers in detached mode:
+	docker run -d --name my_container --link mysql_container:mysql openjdk:8-alpine
+
+5)List running containers:
+	docker ps
+
+6)Show logs of containers:
+	docker logs <container_id>
+
+7)Interact with containers:
+	docker exec -it <container_id> bash
+
+8)Stop and start containers:
+
+	docker stop <container_id>
+	docker start <container_id>
+
+9)Create your own registry:
+	docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+10)Create your own image and list all images:
+	
+	docker build -t my_custom_image .
+	docker images
+
+11)Push, pull, and remove image from your own registry:
+	docker tag my_custom_image localhost:5000/my_custom_image
+	docker push localhost:5000/my_custom_image
+	docker pull localhost:5000/my_custom_image
+	docker rmi localhost:5000/my_custom_image
+
+12)Remove stopped containers:
+	docker container prune
+
+13)List information about networks:
+	docker network ls
+	docker network inspect <network_name>
+
+14)Dockerfile for "Hello World" Java program:
+	# Use openjdk:8 image as base
+	FROM openjdk:8-alpine
+
+	# Set working directory
+	WORKDIR /usr/src/app
+
+	# Copy the Java program
+	COPY HelloWorld.java .
+
+	# Compile the Java program
+	RUN javac HelloWorld.java
+
+	# Run the Java program
+	CMD ["java", "HelloWorld"]
+
+15)Run the customize image and push to hub.docker.com:
+	docker run -d my_custom_image
+	docker tag my_custom_image username/my_custom_image
+	docker push username/my_custom_image
+
+
+
+
+
+
+
+
